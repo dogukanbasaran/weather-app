@@ -1,4 +1,6 @@
-const btnFetch = document.querySelector("#search-box i");
+const btnFetch = document.querySelector("#search-btn");
+const loader = document.querySelector("#loader");
+const errorStatus = document.querySelector("#error-status");
 
 
 btnFetch.addEventListener("click", () => {
@@ -10,13 +12,21 @@ btnFetch.addEventListener("click", () => {
     
    const url = `https://api.weatherapi.com/v1/current.json?key=4c9e7581c1954214b76201938251001&q=${location}&aqi=no`;
 
+    loader.style.display = "block";
+
     fetch(url)
         .then(response => {
             if(response.ok){
                 console.log(`succeed: ${response.status}`);
             }
             else{
-                throw new Error (`HTTPS Error: ${response.status}`);
+                const errorStatus = document.querySelector("#error-status");
+                errorStatus.style.display = "block";
+                errorStatus.innerHTML = "Invalid location name.";
+                console.log(`HTTPS Error: ${response.status}`);
+                setTimeout(() => {
+                    errorStatus.style.display = "none";
+                }, 3000);
             }
 
             return response.json();
@@ -25,7 +35,10 @@ btnFetch.addEventListener("click", () => {
             displayLocation(data);
         })
         .catch(error => {
-            console.error(`Error fetching data:`, error);
+            console.log(`Error fetching data:`, error);
+        })
+        .finally(() => {
+            loader.style.display = "none";
         });
 
     const locationInput = document.querySelector("#search-box .container input");
@@ -78,13 +91,14 @@ const errorMessage = () => {
     messageContainer.appendChild(closeBtn);
 
     errorBox.appendChild(messageContainer);
-    document.body.appendChild(errorBox);
+    const container = document.querySelector("main .container");
+    container.appendChild(errorBox);
 
     closeBtn.addEventListener("click", () =>{
-        document.body.removeChild(errorBox);
+        container.removeChild(errorBox);
     })
 
     setTimeout(() => {
-        document.body.removeChild(errorBox);
+        container.removeChild(errorBox);
     }, 3000);
 }

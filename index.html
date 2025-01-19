@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App - Dogukan Basaran</title>
+    <title>Weather App</title>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/ea61287fef.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
-    <div id="social-icons">
-        <a class="fa-brands fa-linkedin" href="https://www.linkedin.com/in/dogukanbasaran/"></a>
-        <a  class="fa-brands fa-github" href="http://www.github.com/dogukanbasaran"></a>
-    </div>
-
     <main>
         <div class="container">
             <!-- Search Box -->
             <div id="search-box">
                 <div class="container">
                     <input type="text" placeholder="Search">
-                    <i class="fa-solid fa-location-dot"></i>
+                    <button id="search-btn"><i class="fa-solid fa-location-dot"></i></button>
                 </div>
             </div>
 
             <!-- Displayer Box -->
              <div id="displayer-box">
                 <div class="container">
+                    <div id="loader"></div>
+                    <div id="error-status" style="display: none;"></div>
                     <h3 id="location-name"></h3>
                     <span id="location-temperature"></span>
 
@@ -47,6 +43,10 @@
     <footer>
         <div class="container">
             <span>Dogukan Basaran &copy; 2025.</span>
+            <div id="social-icons">
+                <a class="fa-brands fa-linkedin" href="https://www.linkedin.com/in/dogukanbasaran/"></a>
+                <a  class="fa-brands fa-github" href="http://www.github.com/dogukanbasaran"></a>
+            </div>
         </div>
     </footer>
 
